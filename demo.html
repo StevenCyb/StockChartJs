@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8"/>
+		<meta name="author" content="Steven Cybinski">
+		<meta name="description" content="">
+		<meta name="keywords" content="HTML,CSS,JavaScript,Small,Responsive,History,Overview,Chart">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+		<title>StockChartJs - Demo</title>
+        
+		<style>
+			body {margin:0;}
+			.container {
+				float: left;
+				margin: 5px 0px 0px 5px;
+				width: calc(50vw - 14px);
+			}
+			.container.fill {
+				width: calc(100vw - 22px);
+			}
+			h2 {
+				margin: 0 0 3px 0;
+				padding-left: 5px;
+				font-size: 12px;
+				color: #aaaaaa;
+			}
+			canvas {
+				border: solid 1px #333333;
+				width: 100%;
+				height: calc(15vw - 14px);
+			}
+		</style>
+        
+        <script src="./stockchart.js"></script>
+		<script>
+			var x = 0,
+				sinCharts = [],
+				cosCharts = [];
+			function addData() {
+				x += 1;
+				var sin = Math.sin((x / 10) * Math.PI);
+				var cos = Math.cos((x / 10) * Math.PI);
+				
+				for(var c=0; c<sinCharts.length; c++) {
+					sinCharts[c].push(sin);
+				}
+				for(var c=0; c<cosCharts.length; c++) {
+					cosCharts[c].push(cos);
+				}
+				
+				if(x >= 20) {
+					x = 0;
+				}
+				setTimeout(addData, 50);
+			}
+			function init() {
+				sinCharts = [
+					new StockChartJs(document.getElementById("demo-simple")), 
+					new StockChartJs(document.getElementById("demo-simple-reversed"), {reversed: true}),
+					new StockChartJs(document.getElementById("demo-example"), {
+						limit: 79,
+						padding: {
+							top: 60
+						},
+						x_lines: {
+							positions: [0,0.5,1]
+						},
+						y_lines: {
+							positions: [0,0.5,1]
+						},
+						index_dots: {
+							indexes: [39],
+							radius: 15,
+							color: "#fcba03",
+						}
+					})
+				];
+				cosCharts = [
+					new StockChartJs(document.getElementById("demo-xy-lines"), {
+						info: false,
+						limit: 40,
+						padding: {
+							top: 5,
+							bottom: 5,
+							left: 5,
+							right: 5
+						},
+						x_lines: {
+							positions: [0.25,0.5,0.75]
+						},
+						y_lines: {
+							positions: [0.5],
+							color: "#ffb0b0"
+						}
+					}),
+					new StockChartJs(document.getElementById("demo-dots"), {
+						info: false,
+						padding: {
+							top: 10,
+							bottom: 10,
+							left: 10,
+							right: 10
+						},
+						index_dots: {
+							indexes: [0,4,9,14,19]
+						}
+					}),
+					new StockChartJs(document.getElementById("demo-reversed-dot"), {
+					reversed: true,
+						info: false,
+						padding: {
+							top: 30,
+							bottom: 30,
+							left: 30,
+							right: 30
+						},
+						series: { 
+							color: "#7ea4b3",
+							width: 10
+						},
+						index_dots: {
+							indexes: [0],
+							radius: 30,
+							color: "#7ea4b3",
+							border: 5,
+							border_color: "#678591"
+						}
+					}),
+				];
+				addData();
+			}
+		</script>
+    </head>
+	<body onload="init()">
+		<div class="container">
+			<h2>Sin-Wave - Simple</h2>
+			<canvas id="demo-simple"/>
+		</div>
+		<div class="container">
+			<h2>Sin-Wave - Simple-Reversed</h2>
+			<canvas id="demo-simple-reversed"/>
+		</div>
+		<div class="container fill">
+			<h2>Cos-Wave - No-Info&XY-Lines</h2>
+			<canvas id="demo-xy-lines"/>
+		</div>
+		<div class="container">
+			<h2>Cos-Wave - Dots</h2>
+			<canvas id="demo-dots"/>
+		</div>
+		<div class="container">
+			<h2>Cos-Wave - Reversed&Dot&Styled</h2>
+			<canvas id="demo-reversed-dot"/>
+		</div>
+		<div class="container fill">
+			<h2>Sin-Wave - Example-Style</h2>
+			<canvas id="demo-example"/>
+		</div>
+	</body>
+</html>
