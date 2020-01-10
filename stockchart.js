@@ -1,21 +1,21 @@
 class StockChartJs {
     constructor(canvas, config=null) {
-		if(!(canvas instanceof HTMLCanvasElement)) {
-			throw "Provided object is not a HTMLCanvasElement";
-		}
-		this.data = (config != null && "data" in config)?config["data"]:[];
-		this.limit = (config != null && "limit" in config)?config["limit"]:20;
-		this.reversed = (config != null && "reversed" in config)?config["reversed"]:false;
-		this.scale = (config != null && "scale" in config)?config["scale"]:4;
-		this.info = (config != null && "info" in config)?config["info"]:true;
-		this.infoFont = (config != null && "info_font" in config)?config["info_font"]:"40px Arial";
+        if(!(canvas instanceof HTMLCanvasElement)) {
+                throw "Provided object is not a HTMLCanvasElement";
+        }
+        this.data = (config != null && "data" in config)?config["data"]:[];
+        this.limit = (config != null && "limit" in config)?config["limit"]:20;
+        this.reversed = (config != null && "reversed" in config)?config["reversed"]:false;
+        this.scale = (config != null && "scale" in config)?config["scale"]:4;
+        this.info = (config != null && "info" in config)?config["info"]:true;
+        this.infoFont = (config != null && "info_font" in config)?config["info_font"]:"40px Arial";
         this.infoColor = (config != null && "info_color" in config)?config["info_color"]:"#333333";
-		this.paddingTop = (config != null && "padding" in config && "top" in config["padding"])?config["padding"]["top"]:45;
-		this.paddingBottom = (config != null && "padding" in config && "bottom" in config["padding"])?config["padding"]["bottom"]:35;
-		this.paddingLeft = (config != null && "padding" in config && "left" in config["padding"])?config["padding"]["left"]:40;
-		this.paddingRight = (config != null && "padding" in config && "right" in config["padding"])?config["padding"]["right"]:40;
-		this.lineColor = (config != null && "series" in config && "color" in config["series"])?config["series"]["color"]:"#333333";
-		this.lineWidth = (config != null && "series" in config && "width" in config["series"])?config["series"]["width"]:5;
+        this.paddingTop = (config != null && "padding" in config && "top" in config["padding"])?config["padding"]["top"]:45;
+        this.paddingBottom = (config != null && "padding" in config && "bottom" in config["padding"])?config["padding"]["bottom"]:35;
+        this.paddingLeft = (config != null && "padding" in config && "left" in config["padding"])?config["padding"]["left"]:40;
+        this.paddingRight = (config != null && "padding" in config && "right" in config["padding"])?config["padding"]["right"]:40;
+        this.lineColor = (config != null && "series" in config && "color" in config["series"])?config["series"]["color"]:"#333333";
+        this.lineWidth = (config != null && "series" in config && "width" in config["series"])?config["series"]["width"]:5;
         this.indexDots = (config != null && "index_dots" in config && "indexes" in config["index_dots"])?config["index_dots"]["indexes"]:[];
         this.indexDotRadius = (config != null && "index_dots" in config && "radius" in config["index_dots"])?config["index_dots"]["radius"]:10;
         this.indexDotColor = (config != null && "index_dots" in config && "color" in config["index_dots"])?config["index_dots"]["color"]:"#333333";
